@@ -1,0 +1,159 @@
+[
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 1,
+    "package": null,
+    "photos": null,
+    "text": "สวัสดีค่ะ น้ำฝนนะคะ ตามที่เราเคยคุยกันไว้เรื่องติดตั้งประตูไฟฟ้า คุณรวิทัตได้เลือกแบบสลิง ที่ราคา 33,000 บาท ใช่มัยคะ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 2,
+    "package": null,
+    "photos": null,
+    "text": "ใช่ครับผม",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 3,
+    "package": null,
+    "photos": null,
+    "text": "โอเคค่ะ ฝนรบกวนคุณรวิทัตชำระเงินแพ็กเกจนี้ให้หน่อยนะคะ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 4,
+    "package": {
+      "imageUrl": "",
+      "isPurchased": false,
+      "name": "มอเตอร์ประตูรีโมท HomeXpert ประตูบานซ้อน 2 ติดตั้งแบบสลิง..."
+    },
+    "photos": null,
+    "text": null,
+    "type": "SUBSCRIPTION"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 5,
+    "package": null,
+    "photos": null,
+    "text": "สักครู่นะครับ กำลังชำระเงินครับ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 6,
+    "package": {
+      "imageUrl": "",
+      "isPurchased": true,
+      "name": "มอเตอร์ประตูรีโมท HomeXpert ประตูบานซ้อน 2 ติดตั้งแบบสลิง..."
+    },
+    "photos": null,
+    "text": null,
+    "type": "SUBSCRIPTION"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 7,
+    "package": null,
+    "photos": null,
+    "text": "เรียบร้อยครับผม",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 8,
+    "package": null,
+    "photos": null,
+    "text": "ขอบคุณค่ะ สะดวกให้เข้าไปติดตั้งวันไหนบ้างคะใกล้สุดจะมี 1/11, 5/11 ค่ะ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 9,
+    "package": null,
+    "photos": null,
+    "text": "ผมสะดวก วันที่ 1/11 ครับ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 10,
+    "package": null,
+    "photos": null,
+    "text": "ได้เลยค่ะ เดี๋ยวฝนจะทำนัดหมายให้นะคะ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 11,
+    "package": null,
+    "photos": null,
+    "text": "รบกวนคุณรวิทัต เลือกช่วงเวลาให้ฝนหน่อยค่ะ",
+    "type": "BASIC"
+  },
+  {
+    "appointment": {
+      "availableDates": [
+        { "date": 1711449073377886, "time": 0 },
+        { "date": 1711449073377929, "time": 1 }
+      ],
+      "packageName": "มอเตอร์ประตูรีโมท HomeXpert ประตูบานซ้อน 2 ติดตั้งแบบสลิง...",
+      "selectedDate": null
+    },
+    "deletedAt": null,
+    "id": 12,
+    "package": null,
+    "photos": null,
+    "text": null,
+    "type": "APPOINTMENT"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 13,
+    "package": null,
+    "photos": null,
+    "text": "ตามนี้เลยครับผม",
+    "type": "BASIC"
+  },
+  {
+    "appointment": {
+      "availableDates": [
+        { "date": 1711449073377886, "time": 0 },
+        { "date": 1711449073377929, "time": 1 }
+      ],
+      "packageName": "มอเตอร์ประตูรีโมท HomeXpert ประตูบานซ้อน 2 ติดตั้งแบบสลิง...",
+      "selectedDate": { "date": 1711449073377929, "time": 1 }
+    },
+    "deletedAt": null,
+    "id": 14,
+    "package": null,
+    "photos": null,
+    "text": null,
+    "type": "APPOINTMENT"
+  },
+  {
+    "appointment": null,
+    "deletedAt": null,
+    "id": 15,
+    "package": null,
+    "photos": null,
+    "text": "รับทราบค่ะ ขอบคุณค่ะ",
+    "type": "BASIC"
+  }
+]
