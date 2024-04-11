@@ -4,7 +4,7 @@ import 'dart:io';
 List<WebSocket> sockets = [];
 
 void main(List<String> args) async {
-  final server = await HttpServer.bind('10.0.0.9', 8080);
+  final server = await HttpServer.bind('0.0.0.0', 8081);
   print('Listening on ws://${server.address.address}:${server.port}');
 
   final data = await File('messages.json').readAsString().then(json.decode);
@@ -19,12 +19,13 @@ void main(List<String> args) async {
 
       print('Received: ${method} ${path}');
 
-      switch(route) {
+      switch (route) {
         case 'GET /chat_messages':
         case 'GET /chat_messages/':
           request.response
             ..statusCode = HttpStatus.ok
-            ..headers.set(HttpHeaders.contentTypeHeader, '${ContentType.json};charset=UTF-8')
+            ..headers.set(HttpHeaders.contentTypeHeader,
+                '${ContentType.json};charset=UTF-8')
             ..write(_jsonEncode(data))
             ..close();
           break;
@@ -55,5 +56,4 @@ void handleWebSocket(WebSocket socket) {
   );
 }
 
-String _jsonEncode(Object? data) =>
-    json.encode(data);
+String _jsonEncode(Object? data) => json.encode(data);
