@@ -21,13 +21,21 @@ void main(List<String> args) async {
       switch (route) {
         case 'GET /chat_messages':
         case 'GET /chat_messages/':
-          final data = await file.readAsString().then(json.decode);
+          final messages =
+              await file.readAsString().then(json.decode) as List<dynamic>;
+
+          messages.sort(
+            ((a, b) => DateTime.parse(a['created_at'])
+                .microsecondsSinceEpoch
+                .compareTo(
+                    DateTime.parse(b['created_at']).microsecondsSinceEpoch)),
+          );
 
           request.response
             ..statusCode = HttpStatus.ok
             ..headers.set(HttpHeaders.contentTypeHeader,
                 '${ContentType.json};charset=UTF-8')
-            ..write(_jsonEncode(data))
+            ..write(_jsonEncode(messages))
             ..close();
           break;
 
@@ -45,17 +53,33 @@ void handleWebSocket(WebSocket socket) {
 
   socket.listen(
     (data) async {
-      final message = json.decode(data) as Map<String, dynamic>;
+      final response = json.decode(data) as Map<String, dynamic>;
 
-      if (message['type'] == 'MESSAGE') {
-        final _message = message['message'] as Map<String, dynamic>;
+      if (response['type'] == 'MESSAGE') {
+        final message = response['message'] as Map<String, dynamic>;
         final messages =
             await file.readAsString().then(json.decode) as List<dynamic>;
 
-        messages.add(_message);
+        messages.add(message);
 
         file.createSync();
         file.writeAsStringSync(jsonEncode(messages));
+      } else if (response['type'] == 'EVENT' &&
+          response['event']['type'] == 'DELETE') {
+        final messages =
+            await file.readAsString().then(json.decode) as List<dynamic>;
+        final message = messages.firstWhere(
+            (message) => message['id'] == response['event']['message_id']);
+
+        if (message != null) {
+          messages.remove(message);
+
+          message['deleted_at'] = DateTime.now().toIso8601String();
+          messages.add(message);
+
+          file.createSync();
+          file.writeAsStringSync(jsonEncode(messages));
+        }
       }
 
       sockets.forEach((socket) => socket.add(data));
