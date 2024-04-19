@@ -14,15 +14,25 @@ void main(List<String> args) async {
     } else {
       final path = request.requestedUri.path;
       final method = request.method;
-      final route = '${method} ${path}';
+      final route = '$method $path';
+      final query = request.requestedUri.queryParameters;
 
-      print('Received: ${method} ${path}');
+      print('Received: $method $path $query');
 
       switch (route) {
         case 'GET /chat_messages':
         case 'GET /chat_messages/':
-          final messages =
+          List<dynamic> messages =
               await file.readAsString().then(json.decode) as List<dynamic>;
+          final latest = query['latest'];
+
+          if (latest != null) {
+            messages = messages.where((message) {
+              return DateTime.parse(message['created_at'])
+                      .microsecondsSinceEpoch >
+                  DateTime.parse(latest).microsecondsSinceEpoch;
+            }).toList();
+          }
 
           messages.sort(
             ((a, b) => DateTime.parse(a['created_at'])
