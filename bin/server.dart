@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 List<WebSocket> sockets = [];
-File file = File('messages.json');
+String chatMessagesFile = 'messages.json';
+String homeFile = 'homes.json';
 
 void main(List<String> args) async {
   final server = await HttpServer.bind('0.0.0.0', 8081);
@@ -20,10 +21,24 @@ void main(List<String> args) async {
       print('Received: $method $path $query');
 
       switch (route) {
+        case 'GET /sc_assistant/homes':
+        case 'GET /sc_assistant/homes/':
+          List<dynamic> homes = await File(homeFile)
+              .readAsString()
+              .then(json.decode) as List<dynamic>;
+
+          request.response
+            ..statusCode = HttpStatus.ok
+            ..headers.set(HttpHeaders.contentTypeHeader,
+                '${ContentType.json};charset=UTF-8')
+            ..write(_jsonEncode(homes))
+            ..close();
+          break;
         case 'GET /chat_messages':
         case 'GET /chat_messages/':
-          List<dynamic> messages =
-              await file.readAsString().then(json.decode) as List<dynamic>;
+          List<dynamic> messages = await File(chatMessagesFile)
+              .readAsString()
+              .then(json.decode) as List<dynamic>;
           final latest = query['latest'];
 
           if (latest != null) {
@@ -64,6 +79,7 @@ void handleWebSocket(WebSocket socket) {
   socket.listen(
     (data) async {
       final response = json.decode(data) as Map<String, dynamic>;
+      final file = File(chatMessagesFile);
 
       if (response['type'] == 'MESSAGE') {
         final message = response['message'] as Map<String, dynamic>;

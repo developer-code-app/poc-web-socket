@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "address_number": "889/1",
+    "have_visitor": false,
+    "recently_used_scene": "STANDBY"
+  },
+  {
+    "id": "2",
+    "address_number": "889/2",
+    "have_visitor": false,
+    "recently_used_scene": "STANDBY"
+  },
+  {
+    "id": "3",
+    "address_number": "889/3",
+    "have_visitor": false,
+    "recently_used_scene": "STANDBY"
+  },
+  {
+    "id": "4",
+    "address_number": "889/4",
+    "have_visitor": true,
+    "recently_used_scene": "ACTIVE"
+  }
+]
