@@ -4,6 +4,7 @@ import 'dart:io';
 List<WebSocket> sockets = [];
 String chatMessagesFile = 'messages.json';
 String homeFile = 'homes.json';
+String userProfileFile = 'user_profile.json';
 
 void main(List<String> args) async {
   final server = await HttpServer.bind('0.0.0.0', 8081);
@@ -21,11 +22,23 @@ void main(List<String> args) async {
       print('Received: $method $path $query');
 
       switch (route) {
+        case 'GET /sc_assistant/user/profile':
+        case 'GET /sc_assistant/user/profile/':
+          final userProfile = await File(userProfileFile)
+              .readAsString()
+              .then(json.decode) as Map<String, dynamic>;
+
+          request.response
+            ..statusCode = HttpStatus.ok
+            ..headers.set(HttpHeaders.contentTypeHeader,
+                '${ContentType.json};charset=UTF-8')
+            ..write(_jsonEncode(userProfile))
+            ..close();
+          break;
         case 'GET /sc_assistant/homes':
         case 'GET /sc_assistant/homes/':
-          List<dynamic> homes = await File(homeFile)
-              .readAsString()
-              .then(json.decode) as List<dynamic>;
+          final homes = await File(homeFile).readAsString().then(json.decode)
+              as List<dynamic>;
 
           request.response
             ..statusCode = HttpStatus.ok
